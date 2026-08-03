@@ -1,1 +1,437 @@
 
+📘 Day 03 — Internet Fundamentals & DNS
+Part 2 — DNS (Domain Name System)
+
+Module: Foundation
+
+Difficulty: 🟢 Beginner
+
+Estimated Time: 45–60 Minutes
+
+🎯 Learning Objectives
+
+After completing this lesson, you will be able to:
+
+Understand what DNS is.
+Explain why DNS is required.
+Differentiate Domain Name and IP Address.
+Explain the complete DNS Resolution process.
+Understand Browser Cache and OS Cache.
+Explain the role of Recursive Resolver.
+Understand Root DNS, TLD Server and Authoritative DNS Server.
+Explain TTL (Time To Live).
+Understand common DNS record types.
+📖 What is DNS?
+
+DNS (Domain Name System) is a distributed hierarchical system that converts a Domain Name into an IP Address.
+
+Humans can easily remember names such as:
+
+google.com
+amazon.in
+github.com
+
+But computers communicate using IP Addresses.
+
+DNS acts as a translator between humans and computers.
+
+🤔 Why Do We Need DNS?
+
+Imagine if websites did not have names.
+
+Instead of typing:
+
+google.com
+
+You would have to remember:
+
+142.250.183.78
+
+Now imagine remembering the IP address of every website you visit.
+
+It would be almost impossible.
+
+DNS solves this problem by allowing users to use Domain Names, while computers continue communicating using IP Addresses.
+
+🌍 Real-Life Example
+
+Think about your mobile contacts.
+
+You save:
+
+Rahul
+
+instead of
+
++91-9876543210
+
+When you tap Rahul, your phone internally finds the phone number.
+
+Similarly,
+
+google.com
+        ↓
+142.250.xxx.xxx
+
+DNS converts the name into an IP address.
+
+🌐 What is a Domain Name?
+
+A Domain Name is the human-readable address of a website.
+
+Examples
+google.com
+amazon.in
+github.com
+openai.com
+linkedin.com
+
+Humans remember names.
+
+Computers remember numbers.
+
+🌍 What is an IP Address?
+
+An IP Address is a unique numerical address assigned to every device connected to a network.
+
+Just like every house has a postal address,
+
+every server on the Internet has an IP address.
+
+Example:
+
+142.250.xxx.xxx
+
+Without an IP Address,
+
+devices cannot communicate over the Internet.
+
+🔍 DNS Resolution Process
+
+Suppose you type:
+
+https://google.com
+
+Your browser follows a series of steps to find Google's IP Address.
+
+User
+  │
+  ▼
+Browser
+  │
+  ▼
+Browser Cache
+  │
+  ▼
+OS Cache
+  │
+  ▼
+Recursive DNS Resolver
+  │
+  ▼
+Root DNS Server
+  │
+  ▼
+TLD Server (.com)
+  │
+  ▼
+Authoritative DNS Server
+  │
+  ▼
+IP Address Returned
+
+After receiving the IP Address,
+
+the browser starts building the network connection.
+
+🧠 Step 1 — Browser Cache
+
+The browser first checks whether it already knows the IP Address.
+
+Example:
+
+Chrome Cache
+
+google.com
+
+↓
+
+142.250.xxx.xxx
+
+If found,
+
+the browser immediately uses the cached IP.
+
+No DNS lookup is required.
+
+Benefits
+Faster browsing
+Less network traffic
+Better performance
+💻 Step 2 — Operating System Cache
+
+If the browser cache doesn't contain the IP,
+
+the browser asks the Operating System.
+
+Chrome
+
+↓
+
+Windows / Linux / macOS
+
+↓
+
+DNS Cache
+
+If the operating system already has the IP,
+
+it returns it immediately.
+
+Otherwise,
+
+the next step begins.
+
+🌐 Step 3 — Recursive DNS Resolver
+
+If neither the Browser nor the Operating System knows the IP Address,
+
+the request is sent to a Recursive DNS Resolver.
+
+Usually provided by:
+
+Jio
+Airtel
+BSNL
+
+Public DNS services:
+
+Google DNS (8.8.8.8)
+Cloudflare DNS (1.1.1.1)
+
+The Recursive Resolver performs the complete DNS lookup on behalf of the browser.
+
+🌍 Step 4 — Root DNS Server
+
+The Root DNS Server does not know the website's IP Address.
+
+Instead,
+
+it tells the resolver which Top-Level Domain (TLD) server should be contacted.
+
+Example:
+
+google.com
+
+↓
+
+.com TLD Server
+🌍 Step 5 — TLD (Top-Level Domain) Server
+
+A Top-Level Domain (TLD) is the last part of a domain name.
+
+Examples:
+
+.com
+.in
+.org
+.net
+.edu
+
+The TLD Server tells the resolver which Authoritative DNS Server manages the requested domain.
+
+🌍 Step 6 — Authoritative DNS Server
+
+The Authoritative DNS Server stores the actual DNS records.
+
+Example:
+
+google.com
+
+↓
+
+142.250.xxx.xxx
+
+The server returns the correct IP Address to the resolver.
+
+⏳ What is TTL (Time To Live)?
+
+TTL defines how long a DNS record should remain in the cache before a fresh lookup is performed.
+
+Example:
+
+TTL = 300 Seconds
+
+This means the browser can reuse the cached IP Address for the next 300 seconds.
+
+Benefits
+Faster website loading
+Reduced DNS traffic
+Better performance
+📄 Common DNS Record Types
+Record	Purpose
+A	Maps Domain → IPv4 Address
+AAAA	Maps Domain → IPv6 Address
+CNAME	Alias of another domain
+MX	Mail Server
+TXT	Verification & Security
+NS	Name Server Information
+🏢 Real World Example
+
+Suppose you open:
+
+https://amazon.in
+
+The DNS lookup happens in the following order:
+
+Browser Cache
+        │
+        ▼
+OS Cache
+        │
+        ▼
+Recursive Resolver
+        │
+        ▼
+Root DNS
+        │
+        ▼
+.in TLD Server
+        │
+        ▼
+Amazon Authoritative DNS
+        │
+        ▼
+Amazon IP Address
+
+Only after receiving the IP Address does the browser establish the TCP connection.
+
+🛠 Practical Lab
+
+Open Terminal or Command Prompt and execute:
+
+Windows
+ping google.com
+
+nslookup google.com
+Linux
+ping google.com
+
+nslookup google.com
+
+dig google.com
+
+Observe:
+
+Returned IP Address
+DNS Server
+Response Time
+DNS Information
+🧠 Key Takeaways
+DNS converts Domain Names into IP Addresses.
+Computers communicate using IP Addresses.
+Browser checks its cache before performing DNS lookup.
+The Operating System also maintains a DNS cache.
+Recursive Resolver performs the complete lookup.
+Root DNS points to the correct TLD Server.
+TLD Server points to the Authoritative DNS Server.
+Authoritative DNS Server returns the actual IP Address.
+TTL improves performance by reducing repeated DNS lookups.
+❌ Common Mistakes
+Mistake 1
+
+Thinking DNS is a single server.
+
+Reality: DNS is a distributed hierarchical system.
+
+Mistake 2
+
+Thinking the browser directly contacts the Root DNS Server.
+
+Reality: The browser first checks Browser Cache, OS Cache, and then contacts the Recursive Resolver.
+
+Mistake 3
+
+Thinking DNS stores website content.
+
+Reality: DNS stores only domain-related records.
+
+💼 Interview Questions
+Beginner
+What is DNS?
+Why is DNS required?
+What is a Domain Name?
+What is an IP Address?
+Intermediate
+Explain the DNS Resolution Process.
+What is TTL?
+What is the role of a Recursive DNS Resolver?
+Difference between Domain Name and IP Address?
+📝 Assignment
+Question 1
+
+Explain the complete DNS Resolution process in your own words.
+
+Question 2
+
+Write the difference between:
+
+Domain Name
+IP Address
+Question 3
+
+Why does the browser check its cache before contacting a DNS server?
+
+Question 4
+
+Draw the complete DNS Resolution flow.
+
+📚 Summary
+User
+   │
+   ▼
+Browser
+   │
+   ▼
+Browser Cache
+   │
+   ▼
+OS Cache
+   │
+   ▼
+Recursive DNS Resolver
+   │
+   ▼
+Root DNS
+   │
+   ▼
+TLD Server
+   │
+   ▼
+Authoritative DNS
+   │
+   ▼
+IP Address
+📖 Glossary
+Term	Meaning
+DNS	Domain Name System
+Domain Name	Human-readable website address
+IP Address	Unique numerical address of a device
+Recursive Resolver	Performs DNS lookup on behalf of the client
+Root DNS	Directs requests to the appropriate TLD
+TLD	Top-Level Domain (.com, .in, .org)
+Authoritative DNS	Stores actual DNS records
+TTL	Time To Live (cache duration)
+🚀 Next Lesson
+
+Day 03 – Part 3: TCP & Reliable Communication
+
+Topics:
+
+What is TCP?
+Why TCP is required?
+TCP vs UDP
+Three-Way Handshake
+Sequence Number
+ACK
+Reliable Communication
