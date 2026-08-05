@@ -2,13 +2,13 @@
 
 > **A Complete Beginner to Advanced System Design Journey**
 >
-> Learn System Design from scratch with structured theory, real-world examples, production architectures, interview preparation, practical assignments, and case studies.
+> Learn System Design from scratch with structured theory, real-world examples, production architectures, interview preparation, practical labs, case studies, and mini projects.
 
-![Progress](https://img.shields.io/badge/Progress-2%2F50-blue)
+![Progress](https://img.shields.io/badge/Progress-8%25-blue)
 ![Status](https://img.shields.io/badge/Status-In%20Progress-success)
 ![Repository](https://img.shields.io/badge/Open%20Source-Yes-brightgreen)
 ![Made With](https://img.shields.io/badge/Made%20With-Markdown-blue)
-![Last Updated](https://img.shields.io/badge/Last%20Updated-July%202026-orange)
+![Learning](https://img.shields.io/badge/Learning-In%20Public-orange)
 
 ---
 
@@ -16,20 +16,9 @@
 
 This repository documents my journey of learning **System Design** from **Beginner → Advanced**.
 
-The goal is not only to prepare for interviews but also to understand how large-scale applications like:
+The goal is not only to prepare for interviews but also to deeply understand **how large-scale distributed systems work internally**, why they are designed that way, and how to implement similar architectures in real-world projects.
 
-- Amazon
-- Netflix
-- WhatsApp
-- Instagram
-- YouTube
-- UPI
-- Crypto Exchanges
-- Village Delivery Apps
-
-are designed, built, and scaled in production.
-
-Every chapter is written in a structured format with detailed explanations, architecture diagrams, interview questions, assignments, and production-level examples.
+Every chapter is written like a **technical handbook**, covering theory, internal working, architecture diagrams, production examples, interview questions, scenario-based discussions, practical labs, and engineering thinking.
 
 ---
 
@@ -38,9 +27,12 @@ Every chapter is written in a structured format with detailed explanations, arch
 By completing this roadmap, I aim to:
 
 - Understand System Design Fundamentals
+- Master Computer Networking
 - Design Scalable Systems
 - Learn Distributed Systems
 - Build Production-Level Architectures
+- Perform Practical Labs
+- Build Mini Projects
 - Prepare for System Design Interviews
 - Create a High-Quality Open Source Learning Repository
 
@@ -48,57 +40,89 @@ By completing this roadmap, I aim to:
 
 # 📚 What You'll Learn
 
-- 🏗️ High-Level Design (HLD)
-- ⚙️ Low-Level Design (LLD Basics)
-- 🌐 Networking Fundamentals
-- 🌍 Internet & Browser Internals
-- 📡 DNS & HTTP/HTTPS
-- 🗄️ Databases
-- ⚡ Caching (Redis)
-- 🔄 Load Balancing
-- ☁️ Cloud Computing
-- 📨 Message Queues
-- 🔐 Authentication & Security
-- 📊 Scalability
-- 🧩 Microservices
-- 💼 System Design Interview Preparation
-- 🏢 Real Production Case Studies
+### 🏗️ Foundations
+
+- System Design Basics
+- HLD vs LLD
+- Functional vs Non-Functional Requirements
+
+### 🌐 Networking
+
+- Client-Server Architecture
+- Internet Fundamentals
+- DNS
+- HTTP & HTTPS
+- IP Address
+- Ports
+- Sockets
+- TCP
+- UDP
+- TCP Three-Way Handshake
+- Connection Termination
+
+### ⚙️ Backend Concepts
+
+- Load Balancer
+- Reverse Proxy
+- Caching
+- Databases
+- Indexing
+- Message Queues
+- Authentication
+- Rate Limiting
+- API Gateway
+
+### ☁️ Cloud & Scalability
+
+- Docker
+- Kubernetes
+- AWS
+- Azure
+- Google Cloud
+- CDN
+- Distributed Systems
+- Microservices
+
+### 💼 Interview Preparation
+
+- Interview Questions
+- Scenario-Based Questions
+- Engineering Thinking
+- Production Case Studies
 
 ---
 
-# 📈 Course Progress
+# 📈 Repository Progress
 
-| Module | Status |
-|---------|--------|
+| Module | Progress |
+|---------|----------|
 | ✅ Foundation | In Progress |
-| ⏳ Networking | Pending |
-| ⏳ Databases | Pending |
-| ⏳ Caching | Pending |
-| ⏳ Scalability | Pending |
-| ⏳ Microservices | Pending |
-| ⏳ Security | Pending |
-| ⏳ Cloud | Pending |
-| ⏳ Messaging Systems | Pending |
-| ⏳ Case Studies | Pending |
+| ⏳ Networking | Upcoming |
+| ⏳ Databases | Upcoming |
+| ⏳ Caching | Upcoming |
+| ⏳ Scalability | Upcoming |
+| ⏳ Security | Upcoming |
+| ⏳ Cloud | Upcoming |
+| ⏳ Case Studies | Upcoming |
 
 ---
 
-# 📅 Daily Learning Progress
+# 📅 Learning Progress
 
-## Module 1 – Foundation
+## 📘 Module 01 — Foundation
 
 | Day | Topic | Status |
-|-----|-------------------------------|--------|
+|-----|-----------------------------------------------|----------|
 | ✅ Day 01 | Introduction to System Design | Completed |
-| ✅ Day 02 | Client, Server, Request & Response | Completed |
-| ⏳ Day 03 | How the Internet Works | Upcoming |
-| ⏳ Day 04 | DNS (Domain Name System) | Upcoming |
+| ✅ Day 02 | Client-Server Architecture & Request Lifecycle | Completed |
+| ✅ Day 03 | Internet Fundamentals (Internet, Router, Switch, Packet Switching, DNS) | Completed |
+| 🚧 Day 04 | TCP, UDP, Ports & Sockets | In Progress |
 | ⏳ Day 05 | HTTP & HTTPS | Upcoming |
-| ⏳ Day 06 | IP Address & Ports | Upcoming |
-| ⏳ Day 07 | TCP vs UDP | Upcoming |
-| ⏳ Day 08 | Browser Request Journey | Upcoming |
-| ⏳ Day 09 | Reverse Proxy (Nginx) | Upcoming |
-| ⏳ Day 10 | Foundation Revision & Mini Project | Upcoming |
+| ⏳ Day 06 | Load Balancer & Reverse Proxy | Upcoming |
+| ⏳ Day 07 | Caching Basics | Upcoming |
+| ⏳ Day 08 | Databases Basics | Upcoming |
+| ⏳ Day 09 | Foundation Revision | Upcoming |
+| ⏳ Day 10 | Mini Project + Practical Lab | Upcoming |
 
 ---
 
@@ -112,24 +136,20 @@ system-design-roadmap/
 ├── 01-Foundation/
 │   ├── Day-01-System-Design.md
 │   ├── Day-02-Client-Server-Architecture.md
-│   └── images/
+│   ├── Day-03-Internet-Fundamentals.md
+│   ├── Day-04-TCP-UDP.md
+│   ├── images/
+│   └── assets/
 │
 ├── 02-Networking/
-│
 ├── 03-Databases/
-│
 ├── 04-Caching/
-│
 ├── 05-Scalability/
-│
 ├── 06-Microservices/
-│
 ├── 07-Security/
-│
 ├── 08-Cloud/
-│
 ├── 09-Case-Studies/
-│
+├── 10-Mini-Projects/
 └── Resources/
 ```
 
@@ -137,84 +157,133 @@ system-design-roadmap/
 
 # 📖 Learning Format
 
-Each chapter contains:
+Every chapter includes:
 
-- 📚 Concept Explanation
 - 🎯 Learning Objectives
-- 🏗️ Internal Working
-- 🌍 Real-World Examples
+- 📚 Concept Explanation
+- ❓ Why this Concept Exists
+- ⚙️ Internal Working
+- 🏗️ Architecture
+- 🌍 Real-World Analogy
 - 💻 Software Examples
-- 📊 Architecture Diagrams
+- 📊 ASCII Diagrams
+- 📈 Mermaid Diagrams
 - 🏢 Production Architecture
-- ⚠️ Common Mistakes
-- 💼 Interview Questions & Answers
+- 💼 Beginner Interview Questions
+- 💼 Intermediate Interview Questions
+- 💼 Advanced Interview Questions
+- 🎯 Scenario-Based Questions
 - 🧠 Think Like an Engineer
-- 🐞 Real Production Scenarios
-- 📝 Practical Assignment
+- 🧪 Practical Labs
+- ⚠️ Common Mistakes
+- 📝 Assignments
 - 📌 Key Takeaways
-- 📚 Further Reading
+- 📖 Glossary
+- 🔗 Related Topics
 
 ---
 
-# 💻 Tech Stack Used Throughout This Roadmap
+# 🛠️ Learning Workflow
 
+Each topic follows a structured workflow.
+
+```text
+Theory
+    ↓
+Questions & Discussion
+    ↓
+Notion Notes
+    ↓
+GitHub Premium Handbook
+    ↓
+Practical Lab
+    ↓
+Mini Project (Every 10 Days)
+    ↓
+LinkedIn Learning Post
+    ↓
+Premium Infographic
+```
+
+---
+
+# 💻 Tech Stack
+
+- C#
+- ASP.NET Core
 - React
 - Next.js
-- ASP.NET Core
-- Node.js
-- Express.js
 - SQL Server
 - PostgreSQL
 - MongoDB
 - Redis
 - Docker
 - Nginx
-- AWS
-- Azure
-- Google Cloud
 - Git & GitHub
+- Linux
+- Azure
+- AWS
 
 ---
 
 # 🎯 End Goal
 
-After completing this roadmap, I should be able to:
+By the end of this roadmap, I should be able to:
 
-- Design scalable backend systems
-- Understand production architectures
-- Build high-performance APIs
-- Design distributed systems
-- Crack System Design interviews
-- Explain complex architectures with confidence
+- Design Scalable Systems
+- Explain Production Architectures
+- Build High-Performance Backend Systems
+- Implement Distributed System Concepts
+- Build Production-Level Projects
+- Crack System Design Interviews
+- Maintain an Open Source Learning Repository
 
 ---
 
 # 📊 Current Progress
 
 ```text
-████░░░░░░░░░░░░░░░░ 4%
+████████░░░░░░░░░░░░ 8%
 
 ✅ Day 01 Completed
 ✅ Day 02 Completed
-🚧 Currently Preparing for Day 03
+✅ Day 03 Completed
+🚧 Day 04 (TCP, UDP, Ports & Sockets)
 ```
+
+---
+
+# 📌 Repository Standards
+
+Every chapter is documented with:
+
+- ✅ Theory
+- ✅ Internal Working
+- ✅ Architecture Diagrams
+- ✅ Real Examples
+- ✅ Production Examples
+- ✅ Interview Preparation
+- ✅ Practical Labs
+- ✅ Assignments
+- ✅ GitHub Handbook
+- ✅ Notion Notes
 
 ---
 
 # 🤝 Contributions
 
-This repository is primarily a personal learning journey.
+This repository is my public learning journey.
 
-However, if you find mistakes, have suggestions, or want to improve the documentation, feel free to open an Issue or Pull Request.
+Suggestions, improvements, corrections, and discussions are always welcome through Issues and Pull Requests.
 
 ---
 
 # ⭐ Support
 
-If this repository helps you in learning System Design, consider giving it a ⭐.
+If this repository helps you learn System Design, consider giving it a ⭐.
 
-It motivates me to continue improving the content and documenting my learning journey.
+It motivates me to continue documenting my complete learning journey.
 
 ---
 
-## 🚀 Happy Learning!
+## 🚀 Learn • Build • Document • Share
