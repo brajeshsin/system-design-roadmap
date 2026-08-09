@@ -1,1 +1,620 @@
 
+# 📘 Day 04 — Lecture 4: TCP Three-Way Handshake
+
+> **Module:** Networking Foundation  
+> **Difficulty:** 🟡 Beginner → Intermediate  
+> **Status:** 🚧 In Progress
+
+---
+
+# 🎯 Learning Objectives
+
+After completing this chapter, you will understand:
+
+- Why TCP needs connection establishment.
+- What a TCP Three-Way Handshake is.
+- SYN, SYN-ACK and ACK.
+- Initial Sequence Numbers.
+- Why TCP uses three steps.
+- Why SYN and ACK are combined.
+- What happens when handshake packets are lost.
+- How HTTP depends on TCP for reliable transport.
+
+---
+
+# 📖 Introduction
+
+Before TCP transfers application data, it first establishes a connection between the client and server.
+
+This process is called the:
+
+# TCP Three-Way Handshake
+
+The basic flow is:
+
+```text
+Client
+
+↓
+
+SYN
+
+↓
+
+Server
+
+↓
+
+SYN + ACK
+
+↓
+
+Client
+
+↓
+
+ACK
+
+↓
+
+Connection Established
+```
+
+Only after the connection is established can normal application data be transferred.
+
+---
+
+# 🤔 Why Does TCP Need a Handshake?
+
+TCP is a connection-oriented transport protocol.
+
+Before sending application data, TCP needs both sides to establish communication and synchronize important connection state.
+
+The handshake confirms that:
+
+- The client can reach the server.
+- The server can respond.
+- Both sides can communicate.
+- Sequence numbers can be synchronized.
+
+---
+
+# 🌍 Real-Life Analogy
+
+Imagine calling someone:
+
+```text
+You:
+"Hello?"
+
+↓
+
+Friend:
+"Yes, I'm here."
+
+↓
+
+You:
+"Okay, let's talk."
+```
+
+Only after this confirmation does the actual conversation begin.
+
+TCP follows a similar process.
+
+---
+
+# 🔄 Three-Way Handshake
+
+```text
+Client                         Server
+
+SYN -------------------------->
+
+       <---------------- SYN + ACK
+
+ACK -------------------------->
+
+       Connection Established
+```
+
+The three steps are:
+
+1. SYN
+2. SYN + ACK
+3. ACK
+
+---
+
+# 1️⃣ SYN — Synchronize
+
+The client initiates the connection.
+
+```text
+Client                         Server
+
+SYN -------------------------->
+```
+
+The SYN packet contains an Initial Sequence Number (ISN).
+
+Example:
+
+```text
+SYN
+Seq = 1000
+```
+
+Conceptually:
+
+> "I want to establish a connection, and my initial sequence number is 1000."
+
+---
+
+# 2️⃣ SYN + ACK
+
+The server receives the client's SYN.
+
+It responds with:
+
+```text
+SYN + ACK
+```
+
+The packet performs two jobs.
+
+### ACK
+
+The server acknowledges the client's SYN.
+
+```text
+ACK = 1001
+```
+
+Meaning:
+
+> "I received your SYN."
+
+### SYN
+
+The server sends its own SYN and Initial Sequence Number.
+
+```text
+Seq = 5000
+```
+
+Meaning:
+
+> "I also want to establish a connection."
+
+So the response contains:
+
+```text
+SYN
+Seq = 5000
+
+ACK
+Ack = 1001
+```
+
+---
+
+# 3️⃣ ACK
+
+The client receives the server's SYN + ACK.
+
+It sends the final ACK:
+
+```text
+Client                         Server
+
+ACK -------------------------->
+```
+
+Example:
+
+```text
+ACK = 5001
+```
+
+Meaning:
+
+> "I received your SYN and sequence number."
+
+The TCP connection is now established.
+
+---
+
+# 🧠 Meaning of the Three Steps
+
+```text
+SYN
+
+"I want to connect."
+
+↓
+
+SYN + ACK
+
+"I received your request,
+and I also want to connect."
+
+↓
+
+ACK
+
+"I received your response."
+
+↓
+
+Connection Established
+```
+
+---
+
+# 🔢 Sequence Numbers
+
+TCP uses sequence numbers to track **bytes in the data stream**.
+
+They help TCP:
+
+- Maintain ordering.
+- Detect missing data.
+- Detect duplicate data.
+- Support retransmission.
+- Maintain reliable communication.
+
+Example:
+
+```text
+Data Stream
+
+Seq 1000
+Seq 1500
+Seq 2000
+```
+
+The receiver can use sequence information to understand the expected data order.
+
+> **Important:** TCP sequence numbers represent byte positions in the stream, not simply packet numbers.
+
+---
+
+# 🤔 Why Not Two Steps?
+
+Imagine:
+
+```text
+Client                         Server
+
+SYN -------------------------->
+
+       <---------------- ACK
+```
+
+The server has acknowledged the client's SYN.
+
+But TCP also needs the server to communicate its own:
+
+- SYN
+- Initial Sequence Number
+
+The client then needs to acknowledge the server's SYN.
+
+Therefore, three steps allow both directions to be synchronized.
+
+---
+
+# ⚡ Why SYN + ACK Are Combined
+
+The server needs to:
+
+1. Acknowledge the client's SYN.
+2. Send its own SYN.
+
+Instead of using separate exchanges, TCP combines them:
+
+```text
+SYN + ACK
+```
+
+This avoids unnecessary communication and makes connection establishment more efficient.
+
+```text
+Client                         Server
+
+SYN -------------------------->
+
+       <---------------- SYN+ACK
+
+ACK -------------------------->
+```
+
+---
+
+# ❓ What If the Server Does Not Respond?
+
+```text
+Client                         Server
+
+SYN -------------------------->
+
+             ❌ No Response
+```
+
+The client waits for a response.
+
+If the response doesn't arrive within the retransmission timeout:
+
+```text
+Timeout
+
+↓
+
+SYN Retransmission
+
+↓
+
+Wait Again
+```
+
+After repeated unsuccessful attempts, the connection attempt eventually fails.
+
+Possible causes:
+
+- Server is down.
+- Network failure.
+- Firewall blocking traffic.
+- Wrong IP address.
+- Wrong port.
+- Server unreachable.
+
+---
+
+# ❓ What If the Final ACK Is Lost?
+
+```text
+Client                         Server
+
+SYN -------------------------->
+
+       <---------------- SYN+ACK
+
+ACK --------------------------> ❌
+```
+
+The server does not receive confirmation that the client received its SYN-ACK.
+
+The server can retransmit the SYN-ACK.
+
+```text
+Client                         Server
+
+       <---------------- SYN+ACK
+
+ACK -------------------------->
+```
+
+If the handshake cannot complete after retries, the connection attempt eventually times out.
+
+---
+
+# 🌐 TCP Handshake Before HTTP
+
+The HTTP request normally comes after TCP connection establishment.
+
+```text
+DNS
+
+↓
+
+IP Address
+
+↓
+
+TCP Three-Way Handshake
+
+↓
+
+TCP Connection Established
+
+↓
+
+HTTP Request
+
+↓
+
+HTTP Response
+```
+
+Example:
+
+```text
+Browser
+
+↓
+
+TCP Handshake
+
+↓
+
+HTTP Request
+
+GET /products
+
+↓
+
+Server
+
+↓
+
+HTTP Response
+```
+
+---
+
+# 🔗 HTTP and TCP
+
+HTTP operates at the application layer.
+
+TCP operates at the transport layer.
+
+HTTP can rely on TCP for:
+
+- Reliable delivery
+- Ordered delivery
+- Retransmission of lost TCP data
+
+Conceptually:
+
+```text
+HTTP
+ ↓
+TCP
+ ↓
+IP
+ ↓
+Network
+```
+
+A useful mental model:
+
+```text
+HTTP → What data?
+
+TCP → How reliably?
+
+IP → Where?
+```
+
+---
+
+# 📦 What If Application Data Is Lost?
+
+Suppose:
+
+```text
+HTTP Request
+      ↓
+TCP
+      ↓
+Network
+      ↓
+❌ TCP Data Lost
+```
+
+TCP's reliability mechanisms detect missing data and can retransmit the required TCP data.
+
+HTTP does not normally handle packet-level retransmission itself.
+
+---
+
+# 🌍 Complete Flow
+
+```text
+User
+  ↓
+Browser
+  ↓
+DNS
+  ↓
+IP Address
+  ↓
+TCP Three-Way Handshake
+  ↓
+TCP Connection Established
+  ↓
+HTTP Request
+  ↓
+TCP Reliable Delivery
+  ↓
+Server
+  ↓
+HTTP Response
+  ↓
+Browser
+  ↓
+User
+```
+
+---
+
+# 📊 Mermaid Diagram
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Server
+
+    C->>S: SYN (Seq=1000)
+    S->>C: SYN + ACK (Seq=5000, Ack=1001)
+    C->>S: ACK (Ack=5001)
+    Note over C,S: TCP Connection Established
+    C->>S: HTTP Request
+    S->>C: HTTP Response
+```
+
+---
+
+# 📌 Key Takeaways
+
+- TCP is connection-oriented.
+- TCP establishes a connection before normal data transfer.
+- TCP uses a Three-Way Handshake.
+- The three steps are SYN → SYN-ACK → ACK.
+- SYN starts the connection.
+- ACK confirms receipt.
+- SYN + ACK acknowledges the client's SYN and sends the server's SYN.
+- Sequence Numbers help TCP maintain ordering and reliable delivery.
+- Lost handshake packets can trigger retransmission.
+- HTTP application data is sent after TCP connection establishment.
+- TCP provides reliable transport underneath HTTP.
+
+---
+
+# 🔖 Quick Revision
+
+```text
+SYN
+"I want to connect."
+
+↓
+
+SYN + ACK
+"I received you + I also want to connect."
+
+↓
+
+ACK
+"I received your response."
+
+↓
+
+TCP CONNECTION ESTABLISHED
+
+↓
+
+HTTP REQUEST
+```
+
+---
+
+# 🚧 Chapter Status
+
+This chapter is currently **in progress**.
+
+The next section will contain:
+
+- Beginner Interview Questions
+- Intermediate Interview Questions
+- Advanced Interview Questions
+- Scenario-Based Questions
+- Lost Packet Scenarios
+- Retransmission Scenarios
+- Engineering Thinking
+- Practical Lab
+- Common Mistakes
+- Assignment
+- Chapter Summary
+- Revision Cheat Sheet
+- Glossary
